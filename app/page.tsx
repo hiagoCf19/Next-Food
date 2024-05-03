@@ -1,6 +1,7 @@
 
-import Header from "./components/header/Header";
-import Search from "./components/header/search";
+import Header from "./components/Header";
+import CategoryList from "./components/category-list";
+import Search from "./components/search";
 
 export default function Home() {
   return (
@@ -9,6 +10,10 @@ export default function Home() {
       <div className="px-5 pt-6">
         <Search />
       </div>
+      <div className="px-5 pt-6">
+        <CategoryList />
+      </div>
+
 
     </>
 
