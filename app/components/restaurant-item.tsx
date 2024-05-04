@@ -1,8 +1,9 @@
 import { Restaurant } from "@prisma/client";
 import { BikeIcon, ClockIcon, HeartIcon, StarIcon } from "lucide-react";
 import Image from "next/image";
-import { formatCurrency } from "./helpers/price";
+
 import { Button } from "./ui/button";
+import { formatCurrency } from "../helpers/price";
 
 interface RestaurantItemProps {
   restaurant: Restaurant
@@ -23,7 +24,7 @@ const RestaurantItem = ({ restaurant }: RestaurantItemProps) => {
           <span className="font-semibold text-xs">5.0</span>
         </div>
         <Button
-          size="icon"
+          size={"icon"}
           className="absolute top-2 right-2 bg-[#5b5959ca] w-7 h-7 rounded-full">
           <HeartIcon className="fill-white text-white" size={12} />
         </Button>
