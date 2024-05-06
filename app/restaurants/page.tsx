@@ -38,8 +38,6 @@ const Restaurants = () => {
               className="min-w-full max-w-full"
             />
           ))}
-
-          eee
         </div>
       </div>
     </>
