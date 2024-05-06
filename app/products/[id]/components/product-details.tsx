@@ -32,7 +32,7 @@ const ProductDetails = ({ product, complementaryProducts }: ProductDetailsProps)
   })
 
   return (
-    <div className="p-5">
+    <div className="z-50 relative mt-[-1.5rem] p-5 rounded-t-3xl bg-white">
       {/* RESTAURANTE */}
       <div className="flex items-center gap-[0.375rem]">
         <div className="relative h-8 w-8">
