@@ -20,7 +20,19 @@ interface ICartContext {
   subTotalPrice: number;
   totalPrice: number;
   totalDiscount: number;
-  addProductToCart: (product: Product, quantity: number) => void;
+  addProductToCart: ({ product, quantity, emptyCart }: {
+    product: Prisma.ProductGetPayload<{
+      include: {
+        restaurant: {
+          select: {
+            deliveryFee: true;
+          };
+        };
+      };
+    }>;
+    quantity: number;
+    emptyCart?: boolean;
+  }) => void
   decreseProductQuantity: (productId: string) => void
   increseProductQuantity: (productId: string) => void
   removeProductFromCart: (productId: string) => void
@@ -87,7 +99,24 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const removeProductFromCart = (productId: string) => {
     return setProducts((prev) => prev.filter((product) => product.id !== productId))
   }
-  const addProductToCart = (product: Product, quantity: number) => {
+  const addProductToCart = (
+    { product, quantity, emptyCart }: {
+      product: Prisma.ProductGetPayload<{
+        include: {
+          restaurant: {
+            select: {
+              deliveryFee: true
+            }
+          }
+        }
+      }>,
+      quantity: number,
+      emptyCart?: boolean
+    }
+  ) => {
+    if (emptyCart) {
+      setProducts([])
+    }
     // VERIFICAR SE ALGUM PRODUTO QUE ESTÁ NO CARRINHO JÁ TEM O ID DO PRODUTO QUE QUER SER ADICIONADO
     const isProductAlreadyOnCart = products.some(cartProduct => cartProduct.id === product.id);
     if (isProductAlreadyOnCart) {
