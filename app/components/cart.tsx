@@ -13,7 +13,7 @@ const Cart = () => {
     totalDiscount,
   } = useContext(CartContext)
 
-  const finalPrice = products.length > 0 ? totalPrice + Number(products[0].restaurant.deliveryFee) : 0
+
 
   return (
 
@@ -50,7 +50,7 @@ const Cart = () => {
 
               <div className="flex justify-between items-center text-xs font-semibold">
                 <span>Total</span>
-                <span> {formatCurrency(finalPrice)}</span>
+                <span> {formatCurrency(totalPrice)}</span>
               </div>
 
 
