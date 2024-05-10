@@ -7,7 +7,7 @@ CREATE TABLE "Order" (
     "userId" TEXT NOT NULL,
     "restaurantId" TEXT NOT NULL,
     "deliveryFee" DECIMAL(10,2) NOT NULL,
-    "deliveryTime" INTEGER NOT NULL,
+    "deliveryTimeMinutes" INTEGER NOT NULL,
     "subtotalPrice" DECIMAL(10,2) NOT NULL,
     "totalPrice" DECIMAL(10,2) NOT NULL,
     "totalDiscouts" DECIMAL(10,2) NOT NULL,

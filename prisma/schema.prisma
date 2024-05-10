@@ -41,19 +41,19 @@ model Product {
 }
 
 model Order {
-  id            String      @id @default(uuid())
-  userId        String
-  user          User        @relation(fields: [userId], references: [id])
-  products      Product[]
-  restaurant    Restaurant  @relation(fields: [restaurantId], references: [id])
-  restaurantId  String
-  deliveryFee   Decimal     @db.Decimal(10, 2)
-  deliveryTime  Int
-  subtotalPrice Decimal     @db.Decimal(10, 2)
-  totalPrice    Decimal     @db.Decimal(10, 2)
-  totalDiscouts Decimal     @db.Decimal(10, 2)
-  createdAt     DateTime    @default(now())
-  staus         OrderStatus
+  id                  String      @id @default(uuid())
+  userId              String
+  user                User        @relation(fields: [userId], references: [id])
+  products            Product[]
+  restaurant          Restaurant  @relation(fields: [restaurantId], references: [id])
+  restaurantId        String
+  deliveryFee         Decimal     @db.Decimal(10, 2)
+  deliveryTimeMinutes Int
+  subtotalPrice       Decimal     @db.Decimal(10, 2)
+  totalPrice          Decimal     @db.Decimal(10, 2)
+  totalDiscounts      Decimal     @db.Decimal(10, 2)
+  createdAt           DateTime    @default(now())
+  status              OrderStatus
 }
 
 enum OrderStatus {

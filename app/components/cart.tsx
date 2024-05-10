@@ -1,19 +1,55 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../context/cart";
 import CartItem from "./cart-item";
 import { Card, CardContent } from "./ui/card";
 import { formatCurrency } from "../helpers/price";
 import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
+import { createOrder } from "../_actions/order";
+import { OrderStatus } from "@prisma/client";
+import { useSession } from "next-auth/react";
+import { Loader2 } from "lucide-react";
 
 const Cart = () => {
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false)
+
+  const { data } = useSession();
   const { products,
-    subTotalPrice,
+    subtotalPrice,
+    totalDiscounts,
     totalPrice,
-    totalDiscount,
+    clearCart,
   } = useContext(CartContext)
 
 
+  const handleFinishOrderClick = async () => {
+    const restaurant = products[0].restaurant
+    if (!data?.user) return;
+
+    try {
+      setIsSubmitLoading(true)
+      await createOrder({
+        subtotalPrice,
+        totalDiscounts,
+        totalPrice,
+        deliveryFee: restaurant.deliveryFee,
+        deliveryTimeMinutes: restaurant.deliveryTimeMinutes,
+        restaurant: {
+          connect: { id: restaurant.id }
+        },
+        status: OrderStatus.CONFIRMED,
+        user: {
+          connect: { id: data?.user.id }
+        }
+
+      });
+      clearCart()
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setIsSubmitLoading(false)
+    }
+  }
 
   return (
 
@@ -29,12 +65,12 @@ const Cart = () => {
             <CardContent className="p-4 space-y-4">
               <div className="flex justify-between items-center text-xs">
                 <span className="text-muted-foreground">Subtotal </span>
-                <span>{formatCurrency(subTotalPrice)}</span>
+                <span>{formatCurrency(subtotalPrice)}</span>
               </div>
               <Separator className="bg-[#a7a7a766]" />
               <div className="flex justify-between items-center text-xs">
                 <span className="text-muted-foreground">Descontos</span>
-                <span> - {formatCurrency(totalDiscount)}</span>
+                <span> - {formatCurrency(totalDiscounts)}</span>
               </div>
               <Separator className="bg-[#a7a7a766]" />
               <div className="flex justify-between items-center text-xs">
@@ -59,7 +95,14 @@ const Cart = () => {
             </CardContent>
           </Card>
 
-          <Button className="w-full mt-2">
+          <Button
+            className="w-full mt-2"
+            onClick={handleFinishOrderClick}
+            disabled={isSubmitLoading}
+
+
+          >
+            {isSubmitLoading && (<Loader2 className="mr-2 h-4 w-4 animate-spin" />)}
             Finalizar pedido
           </Button>
         </div>
