@@ -42,6 +42,16 @@ const Cart = () => {
         status: OrderStatus.CONFIRMED,
         user: {
           connect: { id: data?.user.id }
+        },
+        products: {
+          createMany: {
+            data: products.map((product) => (
+              {
+                productId: product.id,
+                quantity: product.quantity,
+              }
+            ))
+          }
         }
 
       });
@@ -103,7 +113,7 @@ const Cart = () => {
               disabled={isSubmitLoading}
             >
               {isSubmitLoading && (<Loader2 className="mr-2 h-4 w-4 animate-spin" />)}
-              Finalizar pedido
+              Concluir pedido
             </Button>
           </div>
         ) :
@@ -111,8 +121,6 @@ const Cart = () => {
             Sua sacola está vazia
           </h2>
         }
-
-
       </div>
 
       <AlertDialog open={isConfirmDialogOpen} onOpenChange={setIsConfirmDialogOpen} >

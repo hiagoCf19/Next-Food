@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { HeartIcon, HomeIcon, LogInIcon, LogOutIcon, MenuIcon, ScrollTextIcon, UserIcon } from 'lucide-react';
+import { HeartIcon, HomeIcon, LogOutIcon, MenuIcon, ScrollTextIcon, UserIcon } from 'lucide-react';
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
@@ -100,9 +100,15 @@ const Header = () => {
           {user && (
             <>
               <div>
-                <Button variant={"ghost"} className="w-full justify-start space-x-3 text-sm font-normal">
-                  <ScrollTextIcon />
-                  <span>Meus Pedidos</span>
+                <Button
+                  variant={"ghost"}
+                  className="w-full justify-start space-x-3 text-sm font-normal"
+                  asChild
+                >
+                  <Link href="/my-orders" >
+                    <ScrollTextIcon />
+                    <span>Meus Pedidos</span>
+                  </Link>
                 </Button>
               </div>
 
