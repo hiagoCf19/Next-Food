@@ -14,7 +14,7 @@ interface CartBannerProps {
 }
 
 const CartBanner = ({ restaurant }: CartBannerProps) => {
-  const { products, totalPrice, totalQuantity } = useContext(CartContext)
+  const { products, totalPrice, totalQuantity, totalDiscounts } = useContext(CartContext)
 
   const restaurantProductsInCart = products.some((product) => {
     return product.restaurantId === restaurant.id
@@ -26,7 +26,7 @@ const CartBanner = ({ restaurant }: CartBannerProps) => {
         {/* PREÇO */}
         <div >
           <span className="text-xs font-medium text-muted-foreground">
-            Total sem entrega: </span>
+            Total com entrega: </span>
           <h3 className="font-semibold">
             {formatCurrency(totalPrice)}
             <span className="text-xs text-muted-foreground font-normal ">

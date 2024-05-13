@@ -7,6 +7,10 @@ import { ChevronRightIcon } from "lucide-react";
 import { Separator } from "./ui/separator";
 import { formatCurrency } from "../helpers/price";
 import Link from "next/link";
+import { useContext } from "react";
+import { CartContext } from "../context/cart";
+import { useRouter } from "next/navigation";
+
 
 interface OrderItemProps {
   order: Prisma.OrderGetPayload<{
@@ -20,16 +24,28 @@ interface OrderItemProps {
     }
   }>
 }
-const OrderItem = ({ order }: OrderItemProps) => {
-  const getOrderStatusLabel = (status: OrderStatus) => {
-    switch (status) {
-      case "CANCELED": return "Cancelado";
-      case "COMPLETED": return "Finalizado";
-      case "CONFIRMED": return "Confirmado";
-      case "DELIVERING": return "Em transporte";
-      case "PREPARING": return "Preparando";
+const getOrderStatusLabel = (status: OrderStatus) => {
+  switch (status) {
+    case "CANCELED": return "Cancelado";
+    case "COMPLETED": return "Finalizado";
+    case "CONFIRMED": return "Confirmado";
+    case "DELIVERING": return "Em transporte";
+    case "PREPARING": return "Preparando";
 
+  }
+}
+const OrderItem = ({ order }: OrderItemProps) => {
+  const { addProductToCart } = useContext(CartContext)
+  const router = useRouter()
+
+  const handleRedoOrderClick = () => {
+    for (const orderProduct of order.products) {
+      addProductToCart({
+        product: { ...orderProduct.product, restaurant: order.restaurant },
+        quantity: orderProduct.quantity
+      })
     }
+    router.push(`/restaurants/${order.restaurantId}`)
   }
   return (
     <Card className="">
@@ -105,6 +121,7 @@ const OrderItem = ({ order }: OrderItemProps) => {
             variant={"ghost"}
             className="text-primary hover:bg-transparent"
             disabled={order.status !== "COMPLETED"}
+            onClick={handleRedoOrderClick}
           >
             Refazer pedido
           </Button>
