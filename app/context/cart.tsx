@@ -118,19 +118,23 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const removeProductFromCart = (productId: string) => {
     return setProducts((prev) => prev.filter((product) => product.id !== productId))
   }
+
+
   const addProductToCart = (
     { product, quantity, emptyCart }: {
       product: Prisma.ProductGetPayload<{
         include: {
           restaurant: {
             select: {
-              deliveryFee: true
+              id: true;
+              deliveryFee: true;
+              deliveryTimeMinutes: true;
             }
           }
         }
-      }>,
-      quantity: number,
-      emptyCart?: boolean
+      }>;
+      quantity: number;
+      emptyCart?: boolean;
     }
   ) => {
     if (emptyCart) {
