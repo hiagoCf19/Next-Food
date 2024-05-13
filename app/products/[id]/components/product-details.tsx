@@ -149,7 +149,7 @@ const ProductDetails = ({ product, complementaryProducts }: ProductDetailsProps)
               Sacola
             </SheetTitle>
           </SheetHeader>
-          <Cart />
+          <Cart setIsOpen={setIsCartOpen} />
         </SheetContent>
       </Sheet>
 
