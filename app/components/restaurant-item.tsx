@@ -16,7 +16,7 @@ interface RestaurantItemProps {
 }
 const RestaurantItem = ({ restaurant, className, userId, userFavoriteRestaurants }: RestaurantItemProps) => {
 
-  const isFavorite = userFavoriteRestaurants.some(fav => fav.restaurantId === restaurant.id);
+  const isFavorite = userFavoriteRestaurants?.some(fav => fav.restaurantId === restaurant.id);
 
   const handleFavoriteClick = async () => {
     if (!userId) return
@@ -60,9 +60,10 @@ const RestaurantItem = ({ restaurant, className, userId, userFavoriteRestaurants
               <HeartIcon className="fill-white text-white" size={12} />
             </Button>
           )}
+
         </div>
         {/* text */}
-        <div className="">
+        <div className="mt-2">
           <h3 className="text-sm font-semibold">{restaurant.name}</h3>
           {/* INFORMAÇÕES DA ENTREGA */}
           <div className="flex gap-3">
