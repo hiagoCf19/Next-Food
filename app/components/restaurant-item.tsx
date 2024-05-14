@@ -1,29 +1,34 @@
 "use client"
-import { Restaurant } from "@prisma/client";
+import { Restaurant, UserFavoriteRestaurant } from "@prisma/client";
 import { BikeIcon, ClockIcon, HeartIcon, StarIcon } from "lucide-react";
 import Image from "next/image";
-
 import { Button } from "./ui/button";
 import { formatCurrency } from "../helpers/price";
 import Link from "next/link";
 import { cn } from "../lib/utils";
-import { favoriteRestaurant } from "../_actions/restaurant";
 import { toast } from "sonner";
-
+import { toggleFavoriteRestaurant } from "../_actions/restaurant";
 interface RestaurantItemProps {
   userId?: string;
   restaurant: Restaurant
   className?: string
+  userFavoriteRestaurants: UserFavoriteRestaurant[]
 }
-const RestaurantItem = ({ restaurant, className, userId }: RestaurantItemProps) => {
+const RestaurantItem = ({ restaurant, className, userId, userFavoriteRestaurants }: RestaurantItemProps) => {
+  const isFavorite = userFavoriteRestaurants.some(fav => fav.restaurantId === restaurant.id);
 
   const handleFavoriteClick = async () => {
     if (!userId) return
+
     try {
-      await favoriteRestaurant(userId, restaurant.id)
-      toast.success("Restaurante favoritado com sucesso!")
+      await toggleFavoriteRestaurant(userId, restaurant.id)
+      toast.success(
+        isFavorite
+          ? "Restaurante removido dos favoritos!"
+          : "Restaurante Favoritado com sucesso!"
+      )
     } catch (error) {
-      toast.error("Você já favoritou este restaurante")
+      toast.error("Erro ao favoritar restaurante")
     }
   }
   return (
@@ -48,7 +53,7 @@ const RestaurantItem = ({ restaurant, className, userId }: RestaurantItemProps) 
           {userId && (
             <Button
               size={"icon"}
-              className="absolute top-2 right-2 bg-[#5b5959ca] w-7 h-7 rounded-full"
+              className={`absolute top-2 right-2 w-7 h-7 rounded-full ${isFavorite ? "bg-primary" : 'bg-[#5b5959ca]'}`}
               onClick={handleFavoriteClick}
             >
               <HeartIcon className="fill-white text-white" size={12} />
