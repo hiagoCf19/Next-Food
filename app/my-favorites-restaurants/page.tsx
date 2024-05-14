@@ -31,7 +31,7 @@ const MyFavoritesRestaurants = async () => {
               restaurant={restaurant}
               key={restaurant.id}
               className="min-w-full max-w-full"
-
+              userFavoriteRestaurants={userFavoriteRestaurants}
             />
           ))}
         </div>

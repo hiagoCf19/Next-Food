@@ -15,6 +15,7 @@ interface RestaurantItemProps {
   userFavoriteRestaurants: UserFavoriteRestaurant[]
 }
 const RestaurantItem = ({ restaurant, className, userId, userFavoriteRestaurants }: RestaurantItemProps) => {
+
   const isFavorite = userFavoriteRestaurants.some(fav => fav.restaurantId === restaurant.id);
 
   const handleFavoriteClick = async () => {
