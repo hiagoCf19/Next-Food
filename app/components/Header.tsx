@@ -8,15 +8,9 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
 
-
-
 const Header = () => {
-
-
   const { data } = useSession()
   const user = data?.user
-
-
   const handleSignInClick = () => {
     signIn()
   }
@@ -38,7 +32,7 @@ const Header = () => {
       </div>
 
       <Sheet>
-        <SheetTrigger>
+        <SheetTrigger asChild>
           <Button
             size="icon"
             variant="outline"

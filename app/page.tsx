@@ -9,8 +9,8 @@ import PromoBanner from "./components/promo-banner";
 import RestaurantList from "./components/restaurant-list";
 import Link from "next/link";
 
-const Home = async () => {
-  const products = await db.product.findMany({
+const fetch = async () => {
+  const getProducts = db.product.findMany({
     where: {
       discountPercentage: {
         gt: 0,
@@ -25,6 +25,23 @@ const Home = async () => {
       }
     }
   })
+  const getBurguersCategory = db.category.findFirst({
+    where: {
+      name: "Hambúrgueres",
+    }
+  })
+  const getPizzasCategory = db.category.findFirst({
+    where: {
+      name: "Pizzas",
+    }
+  })
+
+  const [products, burguersCategory, pizzasCategory] = await Promise.all([getProducts, getBurguersCategory, getPizzasCategory])
+
+  return { products, burguersCategory, pizzasCategory }
+}
+const Home = async () => {
+  const { products, burguersCategory, pizzasCategory } = await fetch();
   return (
     <>
       <Header />
@@ -36,10 +53,12 @@ const Home = async () => {
       </div>
 
       <div className="px-5 pt-6">
-        <PromoBanner
-          src="/banner-promo-01.png"
-          alt="até 30% de desconto em pizzas"
-        />
+        <Link href={`/categories/${pizzasCategory?.id}/products`}>
+          <PromoBanner
+            src="/banner-promo-01.png"
+            alt="até 30% de desconto em pizzas"
+          />
+        </Link>
       </div>
       <div className="pt-6 space-y-4">
         <div className="px-5 flex justify-between items-center">
@@ -62,10 +81,12 @@ const Home = async () => {
         <ProductList products={products} />
       </div>
       <div className="pt-6">
-        <PromoBanner
-          src="/banner-promo-02.png"
-          alt="A partir de 17,90 em lanches"
-        />
+        <Link href={`/categories/${burguersCategory?.id}/products`}>
+          <PromoBanner
+            src="/banner-promo-02.png"
+            alt="A partir de 17,90 em lanches"
+          />
+        </Link>
       </div>
       <div className="pt-6 space-y-4">
         <div className="px-5 flex justify-between items-center">
