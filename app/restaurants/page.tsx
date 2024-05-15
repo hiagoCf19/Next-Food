@@ -21,7 +21,7 @@ const RestaurantsPage = async () => {
   })
   return (
     <Suspense>
-      <Restaurants userFavoriteRestaurants={userFavoriteRestaurants} />
+      <Restaurants userId={session.user.id} userFavoriteRestaurants={userFavoriteRestaurants} />
     </Suspense>
   );
 }

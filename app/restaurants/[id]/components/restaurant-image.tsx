@@ -30,11 +30,8 @@ const RestaurantImage = ({ restaurant }: RestaurantImageProps) => {
       >
         <ChevronLeftIcon />
       </Button>
-      <Button
-        size={"icon"}
-        className="absolute top-4 right-4 bg-[#5b5959ca] rounded-full">
-        <HeartIcon className="fill-white text-white" size={20} />
-      </Button>
+
+
     </div>
   );
 }

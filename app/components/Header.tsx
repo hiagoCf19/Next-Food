@@ -91,9 +91,16 @@ const Header = () => {
             <Separator />
           </div>
           <div className="space-y-2">
-            <Button variant={"ghost"} className="w-full justify-start space-x-3 text-sm font-normal">
-              <HomeIcon />
-              <span>Início</span>
+            <Button
+              variant={"ghost"}
+              className="w-full justify-start space-x-3 text-sm font-normal"
+              asChild
+            >
+              <Link href={"/"}>
+                <HomeIcon />
+                <span>Início</span>
+              </Link>
+
             </Button>
           </div>
 

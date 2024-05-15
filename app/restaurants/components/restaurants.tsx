@@ -9,8 +9,9 @@ import { searchForRestaurants } from "../_actions/search";
 
 interface RestauranteProps {
   userFavoriteRestaurants: UserFavoriteRestaurant[]
+  userId?: string
 }
-const Restaurants = ({ userFavoriteRestaurants }: RestauranteProps) => {
+const Restaurants = ({ userFavoriteRestaurants, userId }: RestauranteProps) => {
 
   const searchParams = useSearchParams();
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
@@ -38,6 +39,7 @@ const Restaurants = ({ userFavoriteRestaurants }: RestauranteProps) => {
         <div className="flex w-full flex-col gap-2">
           {restaurants.map((restaurant) => (
             <RestaurantItem
+              userId={userId}
               userFavoriteRestaurants={userFavoriteRestaurants}
               restaurant={restaurant}
               key={restaurant.id}

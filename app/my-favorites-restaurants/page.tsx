@@ -26,14 +26,20 @@ const MyFavoritesRestaurants = async () => {
           Restaurantes Favoritos
         </h2>
         <div className="flex w-full flex-col gap-2">
-          {userFavoriteRestaurants.map(({ restaurant }) => (
-            <RestaurantItem
-              restaurant={restaurant}
-              key={restaurant.id}
-              className="min-w-full max-w-full"
-              userFavoriteRestaurants={userFavoriteRestaurants}
-            />
-          ))}
+          {userFavoriteRestaurants.length > 0 ? (
+            userFavoriteRestaurants.map(({ restaurant }) => (
+              <RestaurantItem
+                userId={session.user.id}
+                restaurant={restaurant}
+                key={restaurant.id}
+                className="min-w-full max-w-full"
+                userFavoriteRestaurants={userFavoriteRestaurants}
+              />
+            ))
+
+          ) : <div className="flex justify-center items-center border">
+            <h1 className="text-muted-foreground font-medium text-sm">Você não possui restaurantes favoritos</h1>
+          </div>}
         </div>
       </div>
     </>

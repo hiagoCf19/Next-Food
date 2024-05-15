@@ -30,6 +30,7 @@ const RecommendedRestaurants = async () => {
         <div className="flex w-full flex-col gap-2">
           {restaurants.map((restaurant) => (
             <RestaurantItem
+              userId={session.user.id}
               restaurant={restaurant}
               key={restaurant.id}
               className="min-w-full max-w-full"
