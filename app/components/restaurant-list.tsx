@@ -6,13 +6,13 @@ import { authOptions } from "../lib/auth";
 const RestaurantList = async () => {
   7
   const session = await getServerSession(authOptions)
-  const restaurants = await db.restaurant.findMany({ take: 10 })
+  const restaurants = await db.restaurant.findMany({ take: 6 })
   const userFavoriteRestaurants = await db.userFavoriteRestaurant.findMany({
     where: { userId: session?.user.id }
   })
 
   return (
-    <div className="flex overflow-x-scroll [&::-webkit-scrollbar]:hidden gap-4 px-5 ">
+    <div className="flex overflow-x-scroll [&::-webkit-scrollbar]:hidden gap-4 px-5 sm:px-20 ">
       {restaurants.map((restaurant) => (
         <RestaurantItem
           restaurant={restaurant}
