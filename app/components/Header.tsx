@@ -22,18 +22,19 @@ const Header = ({ categories }: HeaderProps) => {
     signOut()
   }
   return (
-    <div className="flex justify-between items-center pt-6 sm:py-2 px-5 sm:px-20">
-      <div className="relative h-9 w-20">
-        <Link href={"/"}>
-          <Image
-            src={"/logo.png"}
-            alt="ifood"
-            fill
-            className="object-contain"
-          />
-        </Link>
+    <div className="flex justify-between items-center sm:pt-0  px-5 sm:px-20">
 
-      </div>
+      <Link href={"/"}>
+        <Image
+          src={"/logo.svg"}
+          alt="ifood"
+          width={150}
+          height={150}
+          className="object-contain"
+        />
+      </Link>
+
+
 
       <Sheet>
         <SheetTrigger asChild>
