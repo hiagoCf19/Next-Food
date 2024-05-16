@@ -18,7 +18,7 @@ const Header = () => {
     signOut()
   }
   return (
-    <div className="flex justify-between pt-6 px-5">
+    <div className="flex justify-between pt-6 px-5 sm:px-20">
       <div className="relative h-9 w-20">
         <Link href={"/"}>
           <Image
