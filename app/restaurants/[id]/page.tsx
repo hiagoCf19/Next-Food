@@ -53,7 +53,7 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
   }
 
   return (
-    <div className="">
+    <>
       <RestaurantImage restaurant={restaurant} />
       <div
         className="flex justify-between items-center px-5 pt-5 z-50 relative mt-[-1.5rem] p-5 rounded-t-3xl bg-white "
@@ -108,7 +108,7 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
       ))}
       <div className="w-full p-5 h-20" />
       <CartBanner restaurant={restaurant} />
-    </div>
+    </>
   );
 }
 

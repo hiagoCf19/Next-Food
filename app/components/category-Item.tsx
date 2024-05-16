@@ -10,14 +10,16 @@ const CategoryItem = ({ category }: CategoryItemProps) => {
   return (
     <Link
       href={`/categories/${category.id}/products`}
-      className="flex justify-center items-center gap-3 py-1 px-4 bg-white shadow-lg rounded-sm"
+      className="flex justify-center items-center flex-1 bg-muted shadow-lg rounded-sm px-6 py-1 relative "
     >
-
       <Image
         src={category.imageUrl}
         alt={category.name}
         height={30}
-        width={30} />
+        width={25}
+
+
+      />
       <span className="font-semibold text-sm">{category.name}</span>
 
 
