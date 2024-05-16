@@ -2,11 +2,12 @@ import Header from "@/app/components/Header";
 import RestaurantItem from "@/app/components/restaurant-item";
 import { authOptions } from "@/app/lib/auth";
 import { db } from "@/app/lib/prisma";
+import { fetch } from "@/app/page";
 import { getServerSession } from "next-auth";
 import { notFound } from "next/navigation";
 
 const RecommendedRestaurants = async () => {
-
+  const { allCategories } = await fetch();
   const restaurants = await db.restaurant.findMany({
 
   })
@@ -24,7 +25,7 @@ const RecommendedRestaurants = async () => {
   })
   return (
     <>
-      <Header />
+      <Header categories={allCategories} />
       <div className=" px-5 py-6">
         <h2 className="mb-6 text-llg font-semibold">Restaurantes Recomendados</h2>
         <div className="flex w-full flex-col gap-2">

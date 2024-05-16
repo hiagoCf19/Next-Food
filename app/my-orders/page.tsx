@@ -4,8 +4,11 @@ import { authOptions } from "../lib/auth";
 import { redirect } from "next/navigation";
 import Header from "../components/Header";
 import OrderItem from "../components/order-item";
+import { fetch } from "../page";
+
 
 const MyOrdersPage = async () => {
+  const { allCategories } = await fetch();
   const session = await getServerSession(authOptions)
   if (!session?.user) {
     return redirect('/')
@@ -25,8 +28,9 @@ const MyOrdersPage = async () => {
     }
   })
   return (
+
     <div >
-      <Header />
+      <Header categories={allCategories} />
       <div className="py-6 px-5">
         <h2 className="font-semibold text-lg ">Meus pedidos</h2>
         <div className="space-y-3 pt-5">

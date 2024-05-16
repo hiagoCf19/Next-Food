@@ -1,7 +1,7 @@
 import Header from "@/app/components/Header";
 import ProductItem from "@/app/components/products-item";
-import RestaurantItem from "@/app/components/restaurant-item";
 import { db } from "@/app/lib/prisma";
+import { fetch } from "@/app/page";
 import { notFound } from "next/navigation";
 
 interface CategoriesPageProps {
@@ -11,6 +11,7 @@ interface CategoriesPageProps {
 }
 
 const CategoriesPage = async ({ params: { id } }: CategoriesPageProps) => {
+  const { allCategories } = await fetch();
   const category = await db.category.findUnique({
     where: {
       id
@@ -27,13 +28,15 @@ const CategoriesPage = async ({ params: { id } }: CategoriesPageProps) => {
       }
     }
   })
+
+
   if (!category) {
     return notFound()
   }
   return (
     <>
 
-      <Header />
+      <Header categories={allCategories} />
       <div className=" px-5 py-6">
         <h2 className="mb-6 text-lg font-bold">
           {category.name}

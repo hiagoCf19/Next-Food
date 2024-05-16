@@ -5,7 +5,16 @@ import { notFound } from "next/navigation";
 import Header from "../components/Header";
 import RestaurantItem from "../components/restaurant-item";
 
+const fetch = async () => {
+  const getAllcategories = db.category.findMany({})
+  const [allCategories] = await Promise.all([getAllcategories])
+
+
+  return { allCategories }
+}
 const MyFavoritesRestaurants = async () => {
+
+  const { allCategories } = await fetch();
   const session = await getServerSession(authOptions)
   if (!session) {
     return notFound()
@@ -20,7 +29,7 @@ const MyFavoritesRestaurants = async () => {
   })
   return (
     <>
-      <Header />
+      <Header categories={allCategories} />
       <div className=" px-5 py-6">
         <h2 className="mb-6 text-llg font-semibold">
           Restaurantes Favoritos

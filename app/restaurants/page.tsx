@@ -5,8 +5,10 @@ import { db } from "../lib/prisma";
 import { notFound } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../lib/auth";
+import { fetch } from "../page";
 
 const RestaurantsPage = async () => {
+  const { allCategories } = await fetch();
   const session = await getServerSession(authOptions)
   if (!session) {
     return notFound()
@@ -21,7 +23,11 @@ const RestaurantsPage = async () => {
   })
   return (
     <Suspense>
-      <Restaurants userId={session.user.id} userFavoriteRestaurants={userFavoriteRestaurants} />
+      <Restaurants
+        userId={session.user.id}
+        userFavoriteRestaurants={userFavoriteRestaurants}
+        allCategories={allCategories}
+      />
     </Suspense>
   );
 }

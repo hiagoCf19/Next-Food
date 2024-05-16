@@ -9,7 +9,7 @@ import PromoBanner from "./components/promo-banner";
 import RestaurantList from "./components/restaurant-list";
 import Link from "next/link";
 
-const fetch = async () => {
+export const fetch = async () => {
   const getProducts = db.product.findMany({
     where: {
       discountPercentage: {
@@ -35,16 +35,18 @@ const fetch = async () => {
       name: "Pizzas",
     }
   })
+  const getAllcategories = db.category.findMany({})
 
-  const [products, burguersCategory, pizzasCategory] = await Promise.all([getProducts, getBurguersCategory, getPizzasCategory])
+  const [products, burguersCategory, pizzasCategory, allCategories] = await Promise.all([getProducts, getBurguersCategory, getPizzasCategory, getAllcategories])
 
-  return { products, burguersCategory, pizzasCategory }
+  return { products, burguersCategory, pizzasCategory, allCategories }
 }
 const Home = async () => {
-  const { products, burguersCategory, pizzasCategory } = await fetch();
+  const { products, burguersCategory, pizzasCategory, allCategories } = await fetch();
+
   return (
     <>
-      <Header />
+      <Header categories={allCategories} />
       <div className="px-5 sm:px-0 pt-6 sm:pt-0">
         <Search />
       </div>

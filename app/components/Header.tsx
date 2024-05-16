@@ -7,8 +7,12 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
+import { Category } from "@prisma/client";
 
-const Header = () => {
+interface HeaderProps {
+  categories: Category[]
+}
+const Header = ({ categories }: HeaderProps) => {
   const { data } = useSession()
   const user = data?.user
   const handleSignInClick = () => {
@@ -92,7 +96,7 @@ const Header = () => {
             >
               <Link href={"/"}>
                 <HomeIcon />
-                <span>Início</span>
+                <span className="font-medium">Início</span>
               </Link>
 
             </Button>
@@ -128,14 +132,40 @@ const Header = () => {
           <div className="py-6">
             <Separator />
           </div>
+          {/*  categories */}
+          <div className="space-y-2">
+            {categories.map((category) => (
+              <Button
+                variant={"ghost"}
+                className="w-full justify-start space-x-3 text-sm font-normal"
+                asChild
+                key={category.id}
+              >
+                <Link href={`categories/${category.id}/products`}>
+                  <Image
+                    src={category.imageUrl}
+                    width={25}
+                    height={25}
+                    alt={category.name}
+                  />
+                  <span className="font-medium">{category.name}</span>
+                </Link>
+
+              </Button>
+            ))}
+
+          </div>
+          <div className="py-6">
+            <Separator />
+          </div>
           {user &&
             <Button
               variant={"ghost"}
               className="w-full justify-start space-x-3 text-sm font-normal"
               onClick={handleSingOutClick}
             >
-              <LogOutIcon size={20} />
-              <span> Sair da conta</span>
+              <LogOutIcon size={20} className="text-red-500" />
+              <span className="text-red-500 font-medium"> Sair da conta</span>
             </Button>
           }
         </SheetContent>
