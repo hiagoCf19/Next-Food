@@ -8,8 +8,10 @@ interface CategoryItemProps {
 }
 const CategoryItem = ({ category }: CategoryItemProps) => {
   return (
-    <Link
-      href={`/categories/${category.id}/products`}
+
+    < Link
+      href={`/categories/${category.id}/products`
+      }
       className="flex justify-center items-center flex-1 bg-muted shadow-lg rounded-sm px-6 py-1 relative "
     >
       <Image
@@ -17,15 +19,11 @@ const CategoryItem = ({ category }: CategoryItemProps) => {
         alt={category.name}
         height={30}
         width={25}
-
-
       />
       <span className="font-semibold text-sm">{category.name}</span>
 
 
-
-
-    </Link>
+    </Link >
   );
 }
 
