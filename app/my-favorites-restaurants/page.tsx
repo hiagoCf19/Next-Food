@@ -4,14 +4,8 @@ import { authOptions } from "../lib/auth";
 import { notFound } from "next/navigation";
 import Header from "../components/Header";
 import RestaurantItem from "../components/restaurant-item";
+import { fetch } from "../page";
 
-const fetch = async () => {
-  const getAllcategories = db.category.findMany({})
-  const [allCategories] = await Promise.all([getAllcategories])
-
-
-  return { allCategories }
-}
 const MyFavoritesRestaurants = async () => {
 
   const { allCategories } = await fetch();
@@ -30,11 +24,11 @@ const MyFavoritesRestaurants = async () => {
   return (
     <>
       <Header categories={allCategories} />
-      <div className=" px-5 py-6">
-        <h2 className="mb-6 text-llg font-semibold">
+      <div className=" px-5 py-6 sm:px-20">
+        <h2 className="mb-6 text-llg font-semibold sm:text-xl sm:font-semibold">
           Restaurantes Favoritos
         </h2>
-        <div className="flex w-full flex-col gap-2">
+        <div className="flex w-full flex-col sm:grid sm:grid-cols-3 gap-2">
           {userFavoriteRestaurants.length > 0 ? (
             userFavoriteRestaurants.map(({ restaurant }) => (
               <RestaurantItem

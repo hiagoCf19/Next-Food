@@ -1,6 +1,6 @@
 "use client"
 import { Restaurant, UserFavoriteRestaurant } from "@prisma/client";
-import { BikeIcon, ClockIcon, HeartIcon, StarIcon } from "lucide-react";
+import { BikeIcon, ClockIcon, HeartIcon, Loader2, StarIcon } from "lucide-react";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { formatCurrency } from "../helpers/price";
@@ -8,6 +8,7 @@ import Link from "next/link";
 import { cn } from "../lib/utils";
 import { toast } from "sonner";
 import { toggleFavoriteRestaurant } from "../_actions/restaurant";
+import { useState } from "react";
 interface RestaurantItemProps {
   userId?: string;
   restaurant: Restaurant
@@ -17,11 +18,14 @@ interface RestaurantItemProps {
 const RestaurantItem = ({ restaurant, className, userId, userFavoriteRestaurants }: RestaurantItemProps) => {
 
   const isFavorite = userFavoriteRestaurants?.some(fav => fav.restaurantId === restaurant.id);
+  const [isFavoriteLoading, setIsFavoriteLoading] = useState(false)
+
 
   const handleFavoriteClick = async () => {
     if (!userId) return
-
+    setIsFavoriteLoading(true)
     try {
+
       await toggleFavoriteRestaurant(userId, restaurant.id)
       toast.success(
         isFavorite
@@ -30,6 +34,10 @@ const RestaurantItem = ({ restaurant, className, userId, userFavoriteRestaurants
       )
     } catch (error) {
       toast.error("Erro ao favoritar restaurante")
+
+    }
+    finally {
+      setIsFavoriteLoading(false)
     }
   }
   return (
@@ -57,7 +65,9 @@ const RestaurantItem = ({ restaurant, className, userId, userFavoriteRestaurants
               className={`absolute top-2 right-2 w-7 h-7 rounded-full ${isFavorite ? "bg-primary" : 'bg-[#5b5959ca]'}`}
               onClick={handleFavoriteClick}
             >
-              <HeartIcon className="fill-white text-white" size={12} />
+              {isFavoriteLoading ?
+                <Loader2 className=" h-4 w-4 animate-spin" />
+                : <HeartIcon className="fill-white text-white" size={12} />}
             </Button>
           )}
 
