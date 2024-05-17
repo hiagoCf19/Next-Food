@@ -22,6 +22,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/app/components/ui/alert-dialog"
+import Link from "next/link";
 
 
 interface ProductDetailsProps {
@@ -86,9 +87,9 @@ const ProductDetails = ({ product, complementaryProducts }: ProductDetailsProps)
               className="rounded-full object-cover"
             />
           </div>
-          <span className="text-xs text-muted-foreground">
+          <Link href={`/restaurants/${product.restaurantId}`} className="text-sm text-muted-foreground font-medium sm:hover:underline sm:cursor-pointer">
             {product?.restaurant?.name}
-          </span>
+          </Link>
         </div>
         {/* NOME DO PRODUTO */}
         <h1 className="font-semibold text-xl">{product.name}</h1>

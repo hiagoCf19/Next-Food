@@ -16,10 +16,11 @@ import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
 import { createOrder } from "../_actions/order";
 import { OrderStatus } from "@prisma/client";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { AlertDialogDescription } from "@radix-ui/react-alert-dialog";
 
 interface CartProps {
   setIsOpen: (isOpen: boolean) => void
@@ -28,8 +29,10 @@ const Cart = ({ setIsOpen }: CartProps) => {
   const router = useRouter();
   const [isSubmitLoading, setIsSubmitLoading] = useState(false)
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false)
-
   const { data } = useSession();
+  const handleSignInClick = () => {
+    signIn()
+  }
   const { products,
     subtotalPrice,
     totalDiscounts,
@@ -149,21 +152,39 @@ const Cart = ({ setIsOpen }: CartProps) => {
           </h2>
         }
       </div>
+      {!data?.user ?
+        <AlertDialog open={isConfirmDialogOpen} onOpenChange={setIsConfirmDialogOpen} >
+          <AlertDialogContent className="w-[90%]">
+            <AlertDialogHeader>
+              <AlertDialogTitle>Faça login para prosseguir</AlertDialogTitle>
+              <AlertDialogDescription>
+                Para realizar um pedido, é necessário estar logado no sistema. Clique em <strong className="text-primary">login</strong> para continuar. Caso não possua uma conta, ela será criada automaticamente.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel >
+                Cancelar
+              </AlertDialogCancel>
+              <AlertDialogAction onClick={handleSignInClick} >Login</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+        :
+        <AlertDialog open={isConfirmDialogOpen} onOpenChange={setIsConfirmDialogOpen} >
 
-      <AlertDialog open={isConfirmDialogOpen} onOpenChange={setIsConfirmDialogOpen} >
+          <AlertDialogContent className="w-[90%]">
+            <AlertDialogHeader>
+              <AlertDialogTitle>Deseja concluir seu pedido?</AlertDialogTitle>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel >
+                Cancelar
+              </AlertDialogCancel>
+              <AlertDialogAction onClick={handleFinishOrderClick}>Concluir</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>}
 
-        <AlertDialogContent className="w-[90%]">
-          <AlertDialogHeader>
-            <AlertDialogTitle>Deseja concluir seu pedido?</AlertDialogTitle>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel >
-              Cancelar
-            </AlertDialogCancel>
-            <AlertDialogAction onClick={handleFinishOrderClick}>Concluir</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </>
 
 
