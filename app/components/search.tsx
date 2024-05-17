@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image";
-import SearchForm from "./inputSearch";
+import InputForm from "./InputForm";
 
 
 const Search = () => {
@@ -14,7 +14,7 @@ const Search = () => {
           <h1 className="font-bold text-5xl">Está com fome?</h1>
           <span className="text-md">Com apenas alguns cliques encontre refeições acessíveis perto de você.</span>
         </div>
-        <SearchForm />
+        <InputForm />
 
       </div>
       <div className="hidden items-end sm:flex sm:marker:justify-center">

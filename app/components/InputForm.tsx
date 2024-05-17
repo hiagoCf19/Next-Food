@@ -4,8 +4,11 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { FormEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
-
-const SearchForm = () => {
+import { cn } from "../lib/utils";
+interface SearchFormProps {
+  className?: string
+}
+const InputForm = ({ className }: SearchFormProps) => {
   const router = useRouter();
   const [search, setSeach] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,12 +22,12 @@ const SearchForm = () => {
     router.push(`/restaurants?search=${search}`)
   };
   return (
-    <form className="flex gap-2 w-full sm:bg-white sm:w-[40%] items-center sm:gap-0 sm:p-3 sm:rounded-lg "
+    <form className="flex gap-2 sm:bg-white w-full sm:w-max items-center sm:gap-0 sm:p-3 sm:rounded-lg "
       onSubmit={handleSearchSubmit}>
 
       <Input
         placeholder="Buscar restaurantes"
-        className=" border-none sm:bg-white outline-none focus-visible:ring-transparent  "
+        className={cn("border-none sm:bg-white outline-none focus-visible:ring-transparent sm:w-[450px] ", className)}
         onChange={handleChange}
         value={search}
 
@@ -36,4 +39,4 @@ const SearchForm = () => {
   );
 }
 
-export default SearchForm;
+export default InputForm;
