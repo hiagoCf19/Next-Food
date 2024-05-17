@@ -19,7 +19,7 @@ const CartBanner = ({ restaurant }: CartBannerProps) => {
   })
   if (!restaurantProductsInCart) return null
   return (
-    <div className="fixed bottom-0 left-0 z-50 p-5 py-2 bg-white w-full border sm:px-20">
+    <div className="fixed bottom-0 left-0 z-50 p-5 py-2 bg-white w-full border sm:px-40">
       <div className="flex justify-between items-center">
         {/* PREÇO */}
         <div >

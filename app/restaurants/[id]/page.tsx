@@ -59,7 +59,7 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
       <div className="mb-5 hidden sm:block">
         <Header categories={allCategories} />
       </div>
-      <div className="sm:flex sm:px-24">
+      <div className="sm:flex sm:px-40">
 
         <RestaurantImage restaurant={restaurant} />
         <div className="flex flex-col overflow-hidden sm:max-w-[35%] pt-5 z-50 relative mt-[-1.5rem] p-5 rounded-t-xl bg-white ">
@@ -108,13 +108,13 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
         </div>
       </div>
       {/* TODO: mostrar mais pedidos futuramente */}
-      <div className="mt-6 space-y-4 sm:px-20">
+      <div className="mt-6 space-y-4 sm:px-40">
         <h2 className="font-semibold px-5">Mais Pedidos</h2>
         <ProductList products={restaurant.products} />
       </div>
 
       {restaurant.categories.map((category) => (
-        <div className="mt-6 space-y-4 sm:px-20" key={category.id}>
+        <div className="mt-6 space-y-4 sm:px-40" key={category.id}>
           <h2 className="font-semibold px-5">{category.name}</h2>
           <ProductList products={category.products} />
         </div>
