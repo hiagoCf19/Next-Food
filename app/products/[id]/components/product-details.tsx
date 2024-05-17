@@ -77,11 +77,11 @@ const ProductDetails = ({ product, complementaryProducts, allCategories }: Produ
 
 
   return (
-    <div>
+    <div className="sm:px-40">
       <div className="mb-5 hidden sm:block">
         <Header categories={allCategories} />
       </div>
-      <div className="sm:flex sm:px-24 sm:gap-5">
+      <div className="sm:flex sm:gap-5">
         <ProductImage product={product} />
         {/* TITULO E PREÇO */}
         <div className="flex flex-col overflow-hidden sm:max-w-[45%] pt-5 z-50 relative mt-[-1.5rem] p-5 rounded-t-xl bg-white ">
@@ -157,7 +157,7 @@ const ProductDetails = ({ product, complementaryProducts, allCategories }: Produ
       </div>
 
 
-      <div className="mt-6 space-y-3 -mx-5 sm:flex sm:flex-col sm:-mx-0  p-5 sm:p-0 sm:px-24">
+      <div className="mt-6 space-y-3 -mx-5 sm:flex sm:flex-col sm:-mx-0  p-5 sm:p-0">
         <h3 className="font-semibold mx-5 sm:mx-0">Sucos</h3>
         <ProductList products={complementaryProducts} />
       </div>

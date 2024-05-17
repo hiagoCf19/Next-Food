@@ -36,7 +36,7 @@ const Header = ({ categories, hiddenInputHeader }: HeaderProps) => {
     signOut()
   }
   return (
-    <div className="flex justify-between items-center sm:pt-0  px-5 sm:px-20">
+    <div className="flex justify-between items-center sm:pt-0  px-5 sm:px-40">
 
       <Link href={"/"}>
         <Image
@@ -194,7 +194,7 @@ const Header = ({ categories, hiddenInputHeader }: HeaderProps) => {
                     <AlertDialogTitle className="text-center">Deseja sair?
                     </AlertDialogTitle>
                   </AlertDialogHeader>
-                  <AlertDialogFooter className=" gap-2 sm:gap-0 justify-center sm:justify-center items-center flex-row">
+                  <AlertDialogFooter className=" gap-2 sm:gap-0 sm:justify-center items-center flex-row">
                     <AlertDialogCancel>Cancelar</AlertDialogCancel>
                     <AlertDialogAction
                       onClick={handleSingOutClick}

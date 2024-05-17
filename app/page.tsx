@@ -62,14 +62,13 @@ const Home = async () => {
           />
         </Link>
       </div>
-      <div className="pt-6 sm:pt-10 space-y-4">
-        <div className="px-5 flex justify-between items-center sm:px-20">
-
+      <div className="pt-6 sm:pt-10 space-y-4 sm:px-40">
+        <div className="px-5 sm:px-0  flex justify-between items-center">
           <h2 className="font-semibold">Pedidos Recomendados</h2>
 
           <Button
             variant={"ghost"}
-            className="text-primary p-0 sm:px-20 hover:bg-transparent hover:text-primary hover:underline h-fit "
+            className="text-primary p-0  hover:bg-transparent hover:text-primary hover:underline h-fit "
             asChild
           >
             <Link href={`/products/recommended`} >
@@ -81,7 +80,7 @@ const Home = async () => {
         </div>
         <ProductList products={products} />
       </div>
-      <div className="pt-6 sm:pt-10 sm:flex sm:px-20">
+      <div className="pt-6 sm:pt-10 sm:flex sm:px-40">
         <Link
           href={`/categories/${pizzasCategory?.id}/products`} className="hidden sm:block">
           <PromoBanner
@@ -96,13 +95,13 @@ const Home = async () => {
           />
         </Link>
       </div>
-      <div className="pt-6 sm:pt-10 space-y-4">
-        <div className="px-5 flex justify-between items-center sm:px-20">
+      <div className="pt-6 sm:pt-10 space-y-4 sm:px-40">
+        <div className="px-5 sm:px-0 flex justify-between items-center ">
 
           <h2 className="font-semibold">Restaurantes Recomendados</h2>
           <Button
             variant={"ghost"}
-            className="text-primary p-0 sm:px-20 hover:bg-transparent hover:text-primary hover:underline h-fit "
+            className="text-primary p-0  hover:bg-transparent hover:text-primary hover:underline h-fit "
             asChild
           >
             <Link href={`/restaurants/recommended`} >

@@ -3,9 +3,7 @@ import ProductItem from "@/app/components/products-item";
 import { db } from "@/app/lib/prisma";
 import { fetch } from "@/app/page";
 
-interface RecoommendedProducsPageProps {
 
-}
 const RecommendedProductsPage = async () => {
   const { allCategories } = await fetch();
   {/* TODO: pegar produtos com mais pedidos */ }
@@ -24,12 +22,13 @@ const RecommendedProductsPage = async () => {
       }
     }
   })
+
   return (
     <>
       <Header categories={allCategories} />
-      <div className=" px-5 py-6">
+      <div className=" px-5 py-6 sm:px-40">
         <h2 className="mb-6 text-llg font-semibold">Produtos Recomendados</h2>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-8 gap-4">
           {products.map((product) => (
             <ProductItem
               product={product}
@@ -38,6 +37,7 @@ const RecommendedProductsPage = async () => {
             />
           ))}
         </div>
+
       </div>
     </>
   );

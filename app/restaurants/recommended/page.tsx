@@ -24,9 +24,9 @@ const RecommendedRestaurants = async () => {
   return (
     <>
       <Header categories={allCategories} />
-      <div className=" px-5 py-6">
+      <div className=" px-5 py-6 sm:px-40">
         <h2 className="mb-6 text-llg font-semibold">Restaurantes Recomendados</h2>
-        <div className="flex w-full flex-col gap-2">
+        <div className="flex w-full flex-col gap-2 sm:grid sm:grid-cols-4 sm:gap-4">
           {restaurants.map((restaurant) => (
             <RestaurantItem
               userId={session?.user.id}

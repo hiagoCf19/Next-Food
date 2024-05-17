@@ -14,12 +14,12 @@ const ProductImage = ({ product }: ProductImageProps) => {
   const router = useRouter();
   const handleBackClick = () => router.back();
   return (
-    <div className="relative w-full h-[360px] sm:aspect-square sm:w-[40%] sm:h-[480px]">
+    <div className="relative w-full h-[360px] sm:aspect-square sm:w-[43%] sm:h-[500px]">
       <Image
         src={product.imageUrl}
         alt={product.name}
         fill
-        className="object-cover sm:aspect-square sm:rounded-lg"
+        className="object-cover sm:object-fill sm:aspect-square sm:rounded-lg"
 
       />
       <Button
