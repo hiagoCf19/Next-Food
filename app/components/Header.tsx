@@ -13,8 +13,9 @@ import InputForm from "./InputForm";
 
 interface HeaderProps {
   categories: Category[]
+  hiddenInputHeader?: boolean
 }
-const Header = ({ categories }: HeaderProps) => {
+const Header = ({ categories, hiddenInputHeader }: HeaderProps) => {
   const { data } = useSession()
   const user = data?.user
   const handleSignInClick = () => {
@@ -36,9 +37,12 @@ const Header = ({ categories }: HeaderProps) => {
         />
       </Link>
 
-      <div className="hidden sm:block w-min">
-        <InputForm className="border-none sm:bg-muted mr-2 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm" />
-      </div>
+      {!hiddenInputHeader && (
+        <div className="hidden sm:block w-min">
+          <InputForm className="border-none sm:bg-muted mr-2 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm" />
+        </div>
+      )
+      }
 
       <Sheet>
         <SheetTrigger asChild>

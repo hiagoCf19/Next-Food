@@ -46,7 +46,7 @@ const Home = async () => {
 
   return (
     <>
-      <Header categories={allCategories} />
+      <Header categories={allCategories} hiddenInputHeader />
       <div className="px-5 sm:px-0 pt-6 sm:pt-0">
         <Search />
       </div>
