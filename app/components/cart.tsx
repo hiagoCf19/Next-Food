@@ -88,13 +88,17 @@ const Cart = ({ setIsOpen }: CartProps) => {
 
   return (
     <>
-      <div className="space-y-2 py-3 relative overflow-y-scroll max-h-[60%] [&::-webkit-scrollbar]:hidden">
-        {products.map((product) => (
-          <CartItem cartProduct={product} key={product.id} />
-        ))}
+      <div className=" py-3 relative">
+        <div className="min-h-[64vh] max-h-[64vh] overflow-y-scroll [&::-webkit-scrollbar]:hidden space-y-2 ">
+
+          {products.map((product) => (
+            <CartItem cartProduct={product} key={product.id} />
+          ))}
+
+        </div>
 
         {products.length > 0 ? (
-          <div className="fixed bottom-0 pb-4 w-[80%]">
+          <div className="fixed sm:relative bottom-0 pb-4 w-[80%] sm:w-full ">
 
             <Card className="border-none shadow-none ">
               <CardContent className="p-4 space-y-4">
