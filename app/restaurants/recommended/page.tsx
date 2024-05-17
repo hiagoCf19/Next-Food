@@ -12,12 +12,10 @@ const RecommendedRestaurants = async () => {
 
   })
   const session = await getServerSession(authOptions)
-  if (!session) {
-    return notFound()
-  }
+
   const userFavoriteRestaurants = await db.userFavoriteRestaurant.findMany({
     where: {
-      userId: session.user.id
+      userId: session?.user.id
     },
     include: {
       restaurant: true,
@@ -31,7 +29,7 @@ const RecommendedRestaurants = async () => {
         <div className="flex w-full flex-col gap-2">
           {restaurants.map((restaurant) => (
             <RestaurantItem
-              userId={session.user.id}
+              userId={session?.user.id}
               restaurant={restaurant}
               key={restaurant.id}
               className="min-w-full max-w-full"
