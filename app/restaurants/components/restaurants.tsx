@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client"
 import Header from "@/app/components/Header";
 import RestaurantItem from "@/app/components/restaurant-item";
@@ -32,12 +33,13 @@ const Restaurants = ({ userFavoriteRestaurants, userId, allCategories }: Restaur
   if (!searchFor) {
     return notFound();
   }
+  console.log(searchFor)
   return (
     <>
       <Header categories={allCategories} />
-      <div className=" px-5 py-6">
-        <h2 className="mb-6 text-llg font-semibold">Restaurantes Encontrados</h2>
-        <div className="flex w-full flex-col gap-2">
+      <div className=" px-5 py-6 sm:px-20">
+        <h2 className="mb-6 text-llg font-semibold">Resultados para "{searchFor}"</h2>
+        <div className="flex w-full flex-col gap-2 sm:grid sm:grid-cols-3">
           {restaurants.map((restaurant) => (
             <RestaurantItem
               userId={userId}
