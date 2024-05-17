@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { HeartIcon, HomeIcon, LogOutIcon, MenuIcon, ScrollTextIcon, UserIcon } from 'lucide-react';
+import { HeartIcon, HomeIcon, LogInIcon, LogOutIcon, MenuIcon, ScrollTextIcon, UserIcon } from 'lucide-react';
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
@@ -9,6 +9,17 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
 import { Category } from "@prisma/client";
 import InputForm from "./InputForm";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger
+} from "./ui/alert-dialog";
 
 
 interface HeaderProps {
@@ -89,7 +100,7 @@ const Header = ({ categories, hiddenInputHeader }: HeaderProps) => {
                 <div className="flex justify-between items-center pt-10">
                   <h2 className="font-semibold">Faça seu login</h2>
                   <Button size={"icon"} onClick={handleSignInClick} className="size-9">
-                    <UserIcon />
+                    <LogInIcon />
                   </Button>
                 </div>
               </>
@@ -171,10 +182,28 @@ const Header = ({ categories, hiddenInputHeader }: HeaderProps) => {
             <Button
               variant={"ghost"}
               className="w-full justify-start space-x-3 text-sm font-normal"
-              onClick={handleSingOutClick}
+
             >
               <LogOutIcon size={20} className="text-red-500" />
-              <span className="text-red-500 font-medium"> Sair da conta</span>
+              <AlertDialog>
+                <AlertDialogTrigger>
+                  <span className="text-red-500 font-medium"> Sair da conta</span>
+                </AlertDialogTrigger>
+                <AlertDialogContent className="max-w-sm rounded-sm">
+                  <AlertDialogHeader>
+                    <AlertDialogTitle className="text-center">Deseja sair?
+                    </AlertDialogTitle>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter className=" gap-2 sm:gap-0 justify-center sm:justify-center items-center flex-row">
+                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={handleSingOutClick}
+                      className="mt-2 sm:mt-0"
+                    >Sair</AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+
             </Button>
           }
         </SheetContent>
