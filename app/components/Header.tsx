@@ -1,13 +1,16 @@
 "use client"
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { HeartIcon, HomeIcon, LogOutIcon, MenuIcon, ScrollTextIcon, UserIcon } from 'lucide-react';
+import { HeartIcon, HomeIcon, LogOutIcon, MenuIcon, ScrollTextIcon, SearchIcon, UserIcon } from 'lucide-react';
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
 import { Category } from "@prisma/client";
+import { Input } from "./ui/input";
+import SearchForm from "./inputSearch";
+
 
 interface HeaderProps {
   categories: Category[]
@@ -34,7 +37,7 @@ const Header = ({ categories }: HeaderProps) => {
         />
       </Link>
 
-
+      <SearchForm />
 
       <Sheet>
         <SheetTrigger asChild>

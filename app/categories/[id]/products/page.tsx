@@ -5,7 +5,7 @@ import { authOptions } from "@/app/lib/auth";
 import { db } from "@/app/lib/prisma";
 import { fetch } from "@/app/page";
 import { getServerSession } from "next-auth";
-import { notFound } from "next/navigation";
+
 
 interface CategoriesPageProps {
   params: {
@@ -31,9 +31,7 @@ const CategoriesPage = async ({ params: { id } }: CategoriesPageProps) => {
       }
     }
   })
-  if (!category) {
-    return notFound()
-  }
+
   const restaurants = await db.restaurant.findMany({
     where: {
       categories: {
@@ -56,7 +54,7 @@ const CategoriesPage = async ({ params: { id } }: CategoriesPageProps) => {
       <Header categories={allCategories} />
       <div className=" px-5 py-6 sm:px-20">
         <h2 className="mb-6 text-lg font-bold">
-          {category.name}
+          {category?.name}
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-8 gap-4 ">
           {category?.products.slice(0, 16).map((product) => (
@@ -75,7 +73,6 @@ const CategoriesPage = async ({ params: { id } }: CategoriesPageProps) => {
                 userId={session?.user.id}
                 userFavoriteRestaurants={userFavoriteRestaurants}
                 className="min-w-full max-w-full"
-
               />
             ))}
           </div>

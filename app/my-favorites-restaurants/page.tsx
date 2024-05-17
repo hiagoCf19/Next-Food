@@ -1,7 +1,6 @@
 import { getServerSession } from "next-auth";
 import { db } from "../lib/prisma";
 import { authOptions } from "../lib/auth";
-import { notFound } from "next/navigation";
 import Header from "../components/Header";
 import RestaurantItem from "../components/restaurant-item";
 import { fetch } from "../page";
@@ -10,12 +9,10 @@ const MyFavoritesRestaurants = async () => {
 
   const { allCategories } = await fetch();
   const session = await getServerSession(authOptions)
-  if (!session) {
-    return notFound()
-  }
+
   const userFavoriteRestaurants = await db.userFavoriteRestaurant.findMany({
     where: {
-      userId: session.user.id
+      userId: session?.user.id
     },
     include: {
       restaurant: true,
@@ -32,7 +29,7 @@ const MyFavoritesRestaurants = async () => {
           {userFavoriteRestaurants.length > 0 ? (
             userFavoriteRestaurants.map(({ restaurant }) => (
               <RestaurantItem
-                userId={session.user.id}
+                userId={session?.user.id}
                 restaurant={restaurant}
                 key={restaurant.id}
                 className="min-w-full max-w-full"

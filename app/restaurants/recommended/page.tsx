@@ -4,7 +4,7 @@ import { authOptions } from "@/app/lib/auth";
 import { db } from "@/app/lib/prisma";
 import { fetch } from "@/app/page";
 import { getServerSession } from "next-auth";
-import { notFound } from "next/navigation";
+
 
 const RecommendedRestaurants = async () => {
   const { allCategories } = await fetch();
