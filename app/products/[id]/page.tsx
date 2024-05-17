@@ -1,7 +1,7 @@
 import { db } from "@/app/lib/prisma";
 import { notFound } from "next/navigation";
-import ProductImage from "./components/product-image";
 import ProductDetails from "./components/product-details";
+import { fetch } from "@/app/page";
 
 interface ProductPageProps {
   params: {
@@ -33,14 +33,9 @@ const ProductPage = async ({ params: { id } }: ProductPageProps) => {
       restaurant: true,
     }
   })
+  const { allCategories } = await fetch();
   return (
-    <div>
-      {/* IMAGE */}
-      <ProductImage product={product} />
-      {/* TITULO E PREÇO */}
-      <ProductDetails product={product} complementaryProducts={juices} />
-
-    </div>
+    <ProductDetails product={product} complementaryProducts={juices} allCategories={allCategories} />
   );
 }
 export default ProductPage;
