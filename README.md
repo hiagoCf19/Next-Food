@@ -1,37 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NextFood - Marketplace de restaurantes.
 
-## Getting Started
+NextFood é uma plataforma que conecta os usuários a uma variedade de restaurantes, oferecendo diferentes categorias de alimentos para entrega rápida. Os usuários podem se cadastrar e autenticar através do Google, além de gerenciar seus pedidos na plataforma.
 
-First, run the development server:
+## Funcionalidades
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Autenticação Google:** Os usuários podem fazer login na plataforma utilizando autenticação com o Google.
+- **Seleção de Restaurantes:** Uma ampla gama de restaurantes está disponível para os usuários escolherem.
+- **Manipulação de Carrinho de Compras:** Os usuários podem adicionar, remover e modificar itens em seus carrinhos de compras.
+- **Histórico de Compras:** A aplicação mantém um histórico permanente de compras realizadas pelos usuários.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tecnologias Utilizadas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js:** Framework de React para desenvolvimento de aplicações web.
+- **Prisma:** ORM (Object-Relational Mapping) para interagir com o banco de dados PostgreSQL de forma segura e eficiente.
+- **PostgreSQL:** Banco de dados relacional utilizado para armazenamento de dados da aplicação.
+- **Tailwind CSS:** Framework de CSS utilizado para estilização do frontend da aplicação.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Como Executar o Projeto Localmente
 
-## Learn More
+1. **Clone o Repositório:**
+   
+   ```bash
+   git clone https://github.com/seu-usuario/nextfood.git
+   ```
+2. **Instale as dependências:**
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   npm install
+   cd nextfood
+   ```
+3. **Configuração do banco de dados:**
+   
+   Configure as variáveis de ambiente no arquivo .env com as credenciais do seu banco de dados PostgreSQL.
+5. **Executando a aplicação:**
+   ```bash
+    npm run dev
+   ```
+6.**Acessando a aplicação:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Acesse a aplicação em http://localhost:3000 no seu navegador.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Contribuição
 
-## Deploy on Vercel
+Contribuições são bem-vindas! Sinta-se à vontade para abrir um pull request para sugerir melhorias, adicionar novas funcionalidades ou corrigir problemas encontrados.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Responsáveis
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# ifood_clone
+- [Hiago Ferreira](https://github.com/hiagoCf19) - Desenvolvedor
+- [Felipe Rocha FSW](https://github.com/felipemotarocha) - Autor/idealizador
+
+
+
+
+
+   
